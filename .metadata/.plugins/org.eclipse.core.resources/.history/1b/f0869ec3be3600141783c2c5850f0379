@@ -1,0 +1,193 @@
+
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Calc extends JFrame implements ActionListener {
+
+	private JButton somar, subtrair, dividir, multiplicar, igual;
+	
+	private JButton numZero, numUm, numDois, numTres, numQuatro, numCinco,
+			numSeis, numSete, numOito, numNove;
+	
+	
+	private JPanel painelBotoes;	
+	private JPanel entrada;
+	private JPanel geral;
+	
+	private JTextField caixaEntrada;
+
+	
+	private double numCalc1;
+	private double numCalc2;
+	private boolean flagNum1 = false;
+	private String operacao = "";
+	
+	
+	public Calc() {
+		// janela principal
+		super("Calculadora");
+		this.setSize(300, 300);
+		this.setLocation(200, 300);
+		this.setResizable(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+			
+		this.iniciaElementos();
+		this.adicionarElementos();
+		this.entrada.setVisible(true);
+		this.painelBotoes.setVisible(true);
+		
+		this.adicionarListeners();
+		
+		this.setVisible(true);
+		
+	}
+
+	private void iniciaElementos() {
+		 //paineis
+		this.entrada = new JPanel();		
+		// painel de botoes
+		this.painelBotoes = new JPanel();
+		this.painelBotoes.setLayout(new GridLayout(0,4));
+		
+		this.geral = new JPanel();
+		this.geral.setLayout(new BorderLayout());
+		
+		// operacoes
+		this.somar = new JButton("+");
+		this.dividir = new JButton("/");
+		this.multiplicar = new JButton("*");
+		this.subtrair = new JButton("-");
+		this.igual = new JButton("=");
+
+		// numeros
+		this.numZero = new JButton("0");
+		this.numUm = new JButton("1");
+		this.numDois = new JButton("2");
+		this.numTres = new JButton("3");
+		this.numQuatro = new JButton("4");
+		this.numCinco = new JButton("5");
+		this.numSeis = new JButton("6");
+		this.numSete = new JButton("7");
+		this.numOito = new JButton("8");
+		this.numNove = new JButton("9");
+		
+		this.caixaEntrada = new JTextField(20);
+		this.caixaEntrada.setVisible(true);
+		
+	}
+
+	public void adicionarListeners(){
+		this.numZero.addActionListener(this);
+		this.numUm.addActionListener(this);
+		this.numDois.addActionListener(this);
+		this.numTres.addActionListener(this);
+		this.numQuatro.addActionListener(this);
+		this.numCinco.addActionListener(this);
+		this.numSeis.addActionListener(this);
+		this.numSete.addActionListener(this);
+		this.numOito.addActionListener(this);
+		this.numNove.addActionListener(this);
+		
+		
+		this.somar.addActionListener(this);
+		this.dividir.addActionListener(this);
+		this.multiplicar.addActionListener(this);
+		this.subtrair.addActionListener(this);
+		this.igual.addActionListener(this);
+	}
+	
+	
+	public void actionPerformed(ActionEvent e){
+		JButton botao = null;
+		if(e.getSource() instanceof JButton){
+			botao = (JButton)e.getSource();
+			this.caixaEntrada.setText(botao.getText());
+			
+			if(botao.getText().equals("-")){
+				operacao = "-";
+				flagNum1 = true;
+			}
+			
+			if(botao.getText().equals("=")){
+				switch(operacao){
+					
+				case "-":
+					caixaEntrada.setText((numCalc1 - numCalc2)+"");
+					break;
+				
+				}
+				
+				
+			}
+			
+			if(!this.flagNum1){
+				this.numCalc1 = Double.parseDouble(botao.getText());
+				System.out.println("entrei");
+				this.flagNum1 = true;
+			}else{
+				this.numCalc2 = Double.parseDouble(botao.getText());				
+			}
+			
+			
+			
+			if(botao.getText().equals("-")){
+				System.out.println("menos");
+				//this.caixaEntrada.setText((numCalc1 - numCalc2) + "");
+			}
+			
+						
+		}
+		
+		
+	}
+	
+	
+	private void adicionarElementos() {
+		//linha 1
+		this.painelBotoes.add(this.numSete);
+		this.painelBotoes.add(this.numOito);
+		this.painelBotoes.add(this.numNove);	
+		this.painelBotoes.add(this.dividir);
+		//linha 2
+		this.painelBotoes.add(this.numQuatro);
+		this.painelBotoes.add(this.numCinco);
+		this.painelBotoes.add(this.numSeis);
+		this.painelBotoes.add(this.multiplicar);
+
+		//linha 3
+		this.painelBotoes.add(this.numUm);
+		this.painelBotoes.add(this.numDois);
+		this.painelBotoes.add(this.numTres);
+		this.painelBotoes.add(this.subtrair);
+		// adicionando operacoes ao painel
+		this.painelBotoes.add(new JButton());
+		this.painelBotoes.add(this.numZero);		
+		this.painelBotoes.add(this.igual);
+		this.painelBotoes.add(this.somar);
+		// adicionando numeracao ao painel	
+		
+		this.entrada.add(this.caixaEntrada);
+		
+		this.geral.add(this.entrada, BorderLayout.NORTH);
+		this.geral.add(this.painelBotoes, BorderLayout.CENTER);
+		
+		//this.add(entrada);
+		this.add(this.geral);
+		
+
+	}
+
+		
+	
+}

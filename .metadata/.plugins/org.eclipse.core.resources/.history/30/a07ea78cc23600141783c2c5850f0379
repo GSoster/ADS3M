@@ -1,0 +1,17 @@
+package main;
+
+import calc.*;
+import calc1.*;
+import calc2.*;
+import calcSoma.*;
+
+public class Main {
+
+	public static void main(String args[]){
+		Calc2 calc2 = new Calc2();
+		Calc calc = new Calc();
+		Calc1 calc1 = new Calc1();
+		CalcSoma calcSoma = new CalcSoma();
+	}
+	
+}
