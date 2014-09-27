@@ -1,6 +1,7 @@
 package br.com.guilhermesoster.SwingPaintBrush;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,7 +61,7 @@ public class MainWindow extends JFrame implements ActionListener{
 	 * Reponsavel por adicionar os elementos aos seus respectivos lugares/paineis
 	 */
 	private void addElements(){
-		this.add(paintableArea, BorderLayout.CENTER);
+		this.add(paintableArea, BorderLayout.CENTER);		
 		toolBar.add(btDrawRect);
 		toolBar.add(btDrawCircle);
 		toolBar.add(Box.createHorizontalGlue());// 'gruda' os elementos a seguir na direita
@@ -70,8 +71,7 @@ public class MainWindow extends JFrame implements ActionListener{
 	}
 	
 	//Daqui para baixo ficam os metodos especificos de cada tipo de elemento
-	private void initPanels(){
-		generalPanel = new JPanel();
+	private void initPanels(){			
 		paintableArea = new PaintableArea(this);
 	}
 	
@@ -84,10 +84,16 @@ public class MainWindow extends JFrame implements ActionListener{
 		btClearScreen = new JButton("Limpar");
 		
 		btDrawRect.addActionListener(this);
+		btDrawCircle.addActionListener(this);
+		btClearScreen.addActionListener(this);
 	}		
 	
 	private void initToolBar(){
 		toolBar = new JToolBar();
+	}
+	
+	public JToolBar getToolBar(){
+		return this.toolBar;
 	}
 	
 	public void actionPerformed(ActionEvent e){
@@ -101,6 +107,18 @@ public class MainWindow extends JFrame implements ActionListener{
 				}catch(IllegalArgumentException ex){
 					JOptionPane.showMessageDialog(null, ex.getMessage());
 				}
+			}
+			
+			if(botao.equals(btDrawCircle)){
+				try{
+					paintableArea.drawCircle(this.getContentPane().getGraphics());
+				}catch(IllegalArgumentException ex){
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+			}
+			
+			if(botao.equals(btClearScreen)){				
+				paintableArea.clearScreen(this.getContentPane().getGraphics());
 			}
 		}
 	}
