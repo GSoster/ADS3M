@@ -4,18 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 public class PaintableArea extends JPanel{
 
-	private Graphics2D g2d;
-	private MainWindow parent;
+	private Graphics2D g2d;	
 	
 	
-	public PaintableArea(MainWindow parent){
-		super();
-		parent = parent;
+	public PaintableArea(){
+		super();		
 		configPaintableArea();				
 	}
 	
@@ -49,6 +46,11 @@ public class PaintableArea extends JPanel{
 		
 	}	
 	
+	/**
+	 * Desenha um circulo dentro da area disponivel
+	 * @param g
+	 * @throws IllegalArgumentException
+	 */
 	public void drawCircle(Graphics g) throws IllegalArgumentException{
 		int posX = Integer.parseInt(JOptionPane.showInputDialog("Insira posicao X: "));
 		if(posX > MainWindow.MAINWINDOW_WIDTH)

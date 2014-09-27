@@ -1,8 +1,6 @@
 package br.com.guilhermesoster.SwingPaintBrush;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -72,7 +70,7 @@ public class MainWindow extends JFrame implements ActionListener{
 	
 	//Daqui para baixo ficam os metodos especificos de cada tipo de elemento
 	private void initPanels(){			
-		paintableArea = new PaintableArea(this);
+		paintableArea = new PaintableArea();
 	}
 	
 	/**
@@ -88,14 +86,16 @@ public class MainWindow extends JFrame implements ActionListener{
 		btClearScreen.addActionListener(this);
 	}		
 	
+	/**
+	 * Inicia toolbar
+	 */
 	private void initToolBar(){
 		toolBar = new JToolBar();
 	}
 	
-	public JToolBar getToolBar(){
-		return this.toolBar;
-	}
-	
+	/**
+	 * Define qual foi a opcao do usuario e age de acordo
+	 */
 	public void actionPerformed(ActionEvent e){
 		JButton botao = null;
 		if(e.getSource() instanceof JButton){
@@ -118,7 +118,8 @@ public class MainWindow extends JFrame implements ActionListener{
 			}
 			
 			if(botao.equals(btClearScreen)){				
-				paintableArea.clearScreen(this.getContentPane().getGraphics());
+				paintableArea.repaint();
+				//paintableArea.clearScreen(this.getContentPane().getGraphics());
 			}
 		}
 	}
