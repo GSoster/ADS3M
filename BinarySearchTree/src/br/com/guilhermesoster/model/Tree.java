@@ -24,6 +24,13 @@ public class Tree {
 		this.root.preOrderSearch();
 	}
 
+	/**
+	 * realiza a busca 'em ordem' em toda a arvore:
+	 * filho da esquerda, this, filho da direita 
+	 */
+	public void inOrderSearch(){
+		this.root.inOrderSearch();
+	}
 	
 	public void print(){
 		this.root.print();

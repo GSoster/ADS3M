@@ -53,15 +53,33 @@ public class Node {
 	 */
 	public void preOrderSearch() {
 		System.out.print(this.getValue());
-		this.getLeftChild().preOrderSearch();
-		this.getRightChild().preOrderSearch();
+		if (this.getLeftChild() != null)
+			this.getLeftChild().preOrderSearch();
+		if (this.getRightChild() != null)
+			this.getRightChild().preOrderSearch();
 	}
 
-	public void print() {
-		System.out.print("("+this.getValue());//se imprime
+	/**
+	 * Faz a busca em toda a arvore da seguinte forma; filho da esquerda, filho
+	 * da direita, this
+	 */
+	public void posOrderSearch() {
 		if(this.getLeftChild() != null)
-			this.getLeftChild().print();
+			this.getLeftChild().posOrderSearch();
 		if(this.getRightChild() != null)
+			this.getRightChild().posOrderSearch();
+		System.out.print(this.getValue());
+	}
+
+	/**
+	 * Representação gráfica da arvore no seguinte formato:
+	 * (root(child(child)(child))(child(child)(child)))
+	 */
+	public void print() {
+		System.out.print("(" + this.getValue());// se imprime
+		if (this.getLeftChild() != null)
+			this.getLeftChild().print();
+		if (this.getRightChild() != null)
 			this.getRightChild().print();
 		System.out.print(")");
 	}
