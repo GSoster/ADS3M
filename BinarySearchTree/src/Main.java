@@ -32,5 +32,11 @@ public class Main {
 		tree.insert(new Node(4));//leftChild do rightChild
 		tree.inOrderSearch();
 		
+		System.out.println();
+		tree.stackSearch();
+		System.out.println();
+		tree.deckSearch();
+		
+		
 	}
 }
