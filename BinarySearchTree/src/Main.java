@@ -5,17 +5,8 @@ public class Main {
 
 		//teste1();
 		
-		//testeRotacaoEsquerda();
-		
-		Tree tree = new Tree();
-		Node root = new Node(1);
-		tree.insert(root);
-		tree.insert(new Node(2));
-		Node n = new Node(3);
-		tree.insert(n);
-		tree.insert(new Node(4));
-		tree.insert(new Node(5));
-		tree.deckSearch();
+		testeRotacaoEsquerda();
+						
 		
 	}
 	
@@ -32,6 +23,8 @@ public class Main {
 		tree.deckSearch();
 		tree.leftRotation(root);
 		//tree.deckSearch(n);
+		tree.deckSearch();
+		tree.rightRotation(n);
 		tree.deckSearch();
 		
 	}

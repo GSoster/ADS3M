@@ -131,14 +131,30 @@ public class Tree {
 	 */
 	public Node leftRotation(Node n) {
 		Tree backUp = new Tree(n.getRightChild().getLeftChild());// B = GS
-		System.out.println("BACKUP: " + backUp.getRoot().getValue());
 		Node newLeftGrandSon = n;
 		Node fd = n.getRightChild();
-		n.getRightChild().setLeftChildren(newLeftGrandSon);// FD.esq = n
+		n.getRightChild().setLeftChild(newLeftGrandSon);// FD.esq = n
 		newLeftGrandSon.setRightChild(backUp.getRoot());// n.dir = b
 		if (n.equals(this.root))
 			this.root = fd;
 		return fd;
+	}
+
+	/**
+	 * Metodo responsavel por fazer a rotacao p/direita a partir de um nodo n
+	 * 
+	 * @param n
+	 * @return nodo que substituiu o n
+	 */
+	public Node rightRotation(Node n) {
+		Tree backUp = new Tree(n.getLeftChild().getRightChild());// B = GS
+		Node newLeftGrandSon = n;
+		Node fe = n.getLeftChild();
+		n.getLeftChild().setRightChild(newLeftGrandSon);// FE.dir = n
+		newLeftGrandSon.setLeftChild(backUp.getRoot());// n.esq = b
+		if (n.equals(this.root))
+			this.root = fe;
+		return fe;
 	}
 
 }

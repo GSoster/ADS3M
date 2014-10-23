@@ -28,16 +28,15 @@ public class Node {
 			if (newChildren.getValue() < this.getValue()) {// inserção na
 															// esquerda
 				if (this.getLeftChild() == null) {
-					this.setLeftChildren(newChildren);
+					this.setLeftChild(newChildren);
 					this.getLeftChild().setParent(this);
 				} else
 					this.getLeftChild().insert(newChildren);
 			} else {// inserção na direita
-				if (this.getRightChild() == null){
+				if (this.getRightChild() == null) {
 					this.setRightChild(newChildren);
 					this.getRightChild().setParent(this);
-				}
-				else
+				} else
 					this.getRightChild().insert(newChildren);
 			}
 
@@ -125,7 +124,7 @@ public class Node {
 	 * 
 	 * @param newChildren
 	 */
-	public void setLeftChildren(Node newChild) {
+	public void setLeftChild(Node newChild) {
 		this.children[0] = newChild;
 	}
 
