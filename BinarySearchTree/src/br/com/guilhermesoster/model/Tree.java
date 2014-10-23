@@ -8,6 +8,19 @@ public class Tree {
 	private Node root;
 
 	/**
+	 * Construtor ja recebendo um nodo raiz.
+	 * 
+	 * @param root
+	 */
+	public Tree(Node root) {
+		this.root = root;
+	}
+
+	public Tree() {
+
+	}
+
+	/**
 	 * metodo responsavel por inserir novos nodos na arvore
 	 * 
 	 * @param newNode
@@ -17,7 +30,6 @@ public class Tree {
 			this.root = newNode;
 		else
 			this.root.insert(newNode);
-
 	}
 
 	/**
@@ -68,7 +80,24 @@ public class Tree {
 	public void deckSearch() {
 		System.out.println("largura:");
 		ArrayDeque<Node> deck = new ArrayDeque<Node>();
-		deck.add(this.root);// adiciona ao fim		
+		deck.add(this.root);// adiciona ao fim
+		while (!deck.isEmpty()) {
+			Node lastElement = deck.poll();// retira o primeiro da fila
+			if (lastElement.getLeftChild() != null)
+				deck.addLast(lastElement.getLeftChild());
+			if (lastElement.getRightChild() != null)
+				deck.addLast(lastElement.getRightChild());
+			System.out.println(lastElement.getValue());
+		}
+	}
+
+	/**
+	 * Busca em largura a partir de um determinado nodo
+	 */
+	public void deckSearch(Node n) {
+		System.out.println("largura:");
+		ArrayDeque<Node> deck = new ArrayDeque<Node>();
+		deck.add(n);// adiciona ao fim
 		while (!deck.isEmpty()) {
 			Node lastElement = deck.poll();// retira o primeiro da fila
 			if (lastElement.getLeftChild() != null)
@@ -84,4 +113,32 @@ public class Tree {
 	public void print() {
 		this.root.print();
 	}
+
+	/**
+	 * Retorna a raiz da arvore
+	 * 
+	 * @return
+	 */
+	public Node getRoot() {
+		return this.root;
+	}
+
+	/**
+	 * Metodo responsavel por fazer a rotacao p/esquerda a partir de um nodo(n)
+	 * 
+	 * @param n
+	 * @return nodo que substituiu o n
+	 */
+	public Node leftRotation(Node n) {
+		Tree backUp = new Tree(n.getRightChild().getLeftChild());// B = GS
+		System.out.println("BACKUP: " + backUp.getRoot().getValue());
+		Node newLeftGrandSon = n;
+		Node fd = n.getRightChild();
+		n.getRightChild().setLeftChildren(newLeftGrandSon);// FD.esq = n
+		newLeftGrandSon.setRightChild(backUp.getRoot());// n.dir = b
+		if (n.equals(this.root))
+			this.root = fd;
+		return fd;
+	}
+
 }

@@ -11,6 +11,12 @@ public class Node {
 		children = new Node[2];
 	}
 
+	public Node(int value, Node parent) {
+		this.value = value;
+		children = new Node[2];
+		this.parent = parent;
+	}
+
 	/**
 	 * Insere um filho de forma ordenada: esquerda -> menor que o nodo
 	 * pai(this); direita -> maior que o nodo pai(this)
@@ -21,13 +27,16 @@ public class Node {
 		if (newChildren != null) {
 			if (newChildren.getValue() < this.getValue()) {// inserção na
 															// esquerda
-				if (this.getLeftChild() == null)
+				if (this.getLeftChild() == null) {
 					this.setLeftChildren(newChildren);
-				else
+					this.getLeftChild().setParent(this);
+				} else
 					this.getLeftChild().insert(newChildren);
 			} else {// inserção na direita
-				if (this.getRightChild() == null)
+				if (this.getRightChild() == null){
 					this.setRightChild(newChildren);
+					this.getRightChild().setParent(this);
+				}
 				else
 					this.getRightChild().insert(newChildren);
 			}
@@ -64,9 +73,9 @@ public class Node {
 	 * da direita, this
 	 */
 	public void posOrderSearch() {
-		if(this.getLeftChild() != null)
+		if (this.getLeftChild() != null)
 			this.getLeftChild().posOrderSearch();
-		if(this.getRightChild() != null)
+		if (this.getRightChild() != null)
 			this.getRightChild().posOrderSearch();
 		System.out.print(this.getValue());
 	}
@@ -127,6 +136,24 @@ public class Node {
 	 */
 	public void setRightChild(Node newChild) {
 		this.children[1] = newChild;
+	}
+
+	/**
+	 * Adiciona um pai ao nodo.
+	 * 
+	 * @param parent
+	 */
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * Retorna o pai do nodo atual
+	 * 
+	 * @return node:parent
+	 */
+	public Node getParent() {
+		return this.parent;
 	}
 
 }

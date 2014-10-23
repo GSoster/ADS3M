@@ -3,10 +3,44 @@ import br.com.guilhermesoster.model.*;
 public class Main {
 	public static void main(String[] args) {
 
+		//teste1();
+		
+		//testeRotacaoEsquerda();
+		
+		Tree tree = new Tree();
+		Node root = new Node(1);
+		tree.insert(root);
+		tree.insert(new Node(2));
+		Node n = new Node(3);
+		tree.insert(n);
+		tree.insert(new Node(4));
+		tree.insert(new Node(5));
+		tree.deckSearch();
+		
+	}
+	
+	private static void testeRotacaoEsquerda(){
+		Tree tree = new Tree();
+		Node root = new Node(5);
+		tree.insert(root);
+		tree.insert(new Node(4));
+		Node n = new Node(7);
+		tree.insert(n);
+		tree.insert(new Node(6));
+		tree.insert(new Node(8));
+		tree.insert(new Node(9));
+		tree.deckSearch();
+		tree.leftRotation(root);
+		//tree.deckSearch(n);
+		tree.deckSearch();
+		
+	}
+	
+	private static void teste1(){
 		Tree tree = new Tree();
 		tree.insert(new Node(1));// root
-		tree.insert(new Node(2));// leftChild
-		tree.insert(new Node(3));// rightChild
+		tree.insert(new Node(2));// rightChild
+		tree.insert(new Node(3));// rightChild do 2
 		// saida do print tem de ser: 123 -> (1(2(3)))
 		tree.print();
 		System.out.println();
@@ -36,7 +70,6 @@ public class Main {
 		tree.stackSearch();
 		System.out.println();
 		tree.deckSearch();
-		
-		
 	}
+	
 }
