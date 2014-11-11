@@ -3,14 +3,25 @@ import br.com.guilhermesoster.model.*;
 public class Main {
 	public static void main(String[] args) {
 
-		//teste1();
-		
-		testeRotacaoEsquerda();
-						
-		
+		// teste1();
+
+		// testeRotacaoEsquerdaEDireita();
+
+		Tree tree = new Tree();
+		Node root = new Node(1);
+		tree.insert(root);
+		tree.insert(new Node(2));
+		Node n = new Node(3);
+		tree.insert(n);
+		tree.insert(new Node(4));
+		tree.insert(new Node(5));
+		tree.deckSearch();
+		tree.leftRotation(n);
+		tree.deckSearch();
+
 	}
-	
-	private static void testeRotacaoEsquerda(){
+
+	private static void testeRotacaoEsquerdaEDireita() {
 		Tree tree = new Tree();
 		Node root = new Node(5);
 		tree.insert(root);
@@ -22,14 +33,14 @@ public class Main {
 		tree.insert(new Node(9));
 		tree.deckSearch();
 		tree.leftRotation(root);
-		//tree.deckSearch(n);
+		// tree.deckSearch(n);
 		tree.deckSearch();
 		tree.rightRotation(n);
 		tree.deckSearch();
-		
+
 	}
-	
-	private static void teste1(){
+
+	private static void teste1() {
 		Tree tree = new Tree();
 		tree.insert(new Node(1));// root
 		tree.insert(new Node(2));// rightChild
@@ -47,22 +58,22 @@ public class Main {
 		tree.print();
 		System.out.println();
 
-		//busca 'em ordem' --> leftChild, this, rightChild
+		// busca 'em ordem' --> leftChild, this, rightChild
 		tree.inOrderSearch();
 		System.out.println();
 		tree = null;
 		tree = new Tree();
-		tree.insert(new Node(2));//root
-		tree.insert(new Node(5));//rightChild
-		tree.insert(new Node(1));//leftChildChild
-		tree.insert(new Node(6));//rightChild do rightChild
-		tree.insert(new Node(4));//leftChild do rightChild
+		tree.insert(new Node(2));// root
+		tree.insert(new Node(5));// rightChild
+		tree.insert(new Node(1));// leftChildChild
+		tree.insert(new Node(6));// rightChild do rightChild
+		tree.insert(new Node(4));// leftChild do rightChild
 		tree.inOrderSearch();
-		
+
 		System.out.println();
 		tree.stackSearch();
 		System.out.println();
 		tree.deckSearch();
 	}
-	
+
 }

@@ -133,6 +133,9 @@ public class Tree {
 		Tree backUp = new Tree(n.getRightChild().getLeftChild());// B = GS
 		Node newLeftGrandSon = n;
 		Node fd = n.getRightChild();
+		//Adicionando a parte de pais p/poder utilizar o metodo no meio de arvores
+		fd.setParent(n.getParent());
+		n.setParent(fd);		
 		n.getRightChild().setLeftChild(newLeftGrandSon);// FD.esq = n
 		newLeftGrandSon.setRightChild(backUp.getRoot());// n.dir = b
 		if (n.equals(this.root))
