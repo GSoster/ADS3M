@@ -37,6 +37,9 @@ public class GrafoMatriz {
 		}
 	}
 	
+	/**
+	 * Exibe quais vertices estao ligados a quais arestas
+	 */
 	public void checarArestas(){
 		for(int i = 0; i < this.qtdVertices; i++){
 			for(int j = 0; j < this.qtdVertices; j++){
@@ -45,4 +48,19 @@ public class GrafoMatriz {
 			}
 		}
 	}
+	
+	/**
+	 * Retorna a quantidade de vertices (e por consequencia o tamanho da matriz)
+	 * @return qtdVertices : int
+	 */
+	public int getQtdVertices(){
+		return this.qtdVertices;
+	}
+	
+	public void executaAlgoritmoDePrim(){
+		int matriz[][] = new int[this.qtdVertices][this.qtdVertices];
+		int backup[][] = this.grafo;
+		
+	}
+	
 }
