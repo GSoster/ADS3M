@@ -32,6 +32,34 @@ public class Tree {
 			this.root.insert(newNode);
 	}
 
+	
+	/**
+	 * busca a altura de um nodo especifico
+	 * @param node
+	 * @return
+	 */
+	public int getH(Node node){
+		if(node == null)
+			return -1;
+		return node.calcH();
+	}
+	
+	/**
+	 * Retorna o fator de balanceamento
+	 * @param node
+	 * @return
+	 */
+	public int getFb(Node node){
+		//return (this.getH(node.getLeftChild()) -this.getH(node.getRightChild()));
+		return node.calcFb();
+	}
+	
+	public void balancear(Node node){
+		if(getFb(node) == 2);
+			
+	}
+	
+	
 	/**
 	 * realiza a busca em toda a arvore
 	 */

@@ -5,6 +5,8 @@ public class Node {
 	private int value;
 	private Node[] children;
 	private Node parent;
+	private int h;//altura
+	private int fb;//fator de balanceamento
 
 	public Node(int value) {
 		this.value = value;
@@ -15,6 +17,7 @@ public class Node {
 		this.value = value;
 		children = new Node[2];
 		this.parent = parent;
+		this.h = 0;
 	}
 
 	/**
@@ -153,6 +156,32 @@ public class Node {
 	 */
 	public Node getParent() {
 		return this.parent;
+	}
+	
+	/**
+	 * Calcula a altura (h).
+	 * @return
+	 */
+	public int calcH(){
+		this.h = 1 + (Math.max(this.getLeftChild().calcH(), this.getRightChild().calcH()));
+		return this.h;
+	}
+	
+	/**
+	 * retorna a altura da arvore
+	 * @return
+	 */
+	public int getH(){
+		return this.h;
+	}
+	
+	/**
+	 * deprecated hehe
+	 * @return
+	 */
+	public int calcFb(){
+		this.fb = (this.getLeftChild().calcH() - this.getRightChild().calcH());
+		return this.fb;
 	}
 
 }
