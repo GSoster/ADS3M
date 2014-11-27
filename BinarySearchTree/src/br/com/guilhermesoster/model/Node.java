@@ -179,8 +179,7 @@ public class Node {
 		else
 			this.h = 1 + (Math.max(this.getLeftChild().calcH(), this
 					.getRightChild().calcH()));
-		
-		//System.out.println("NODO: "+this.getValue()+"H: "+this.h);
+
 		return this.h;
 	}
 
@@ -199,13 +198,13 @@ public class Node {
 	 * @return
 	 */
 	public int calcFb() {
-		if(this.getLeftChild() != null && this.getRightChild() != null)
-			this.fb = (this.getLeftChild().calcH() - this.getRightChild().calcH());
-		else if(this.getLeftChild() !=null && this.getRightChild() == null)
-			this.fb = this.getLeftChild().calcH();
-		else if(this.getRightChild() != null && this.getLeftChild() == null)
-			this.fb = this.getRightChild().calcH();
-		//System.out.println("NODO: "+this.getValue()+"FB: "+this.fb);
+		if (this.getLeftChild() != null && this.getRightChild() != null)
+			this.fb = (this.getLeftChild().calcH() - this.getRightChild()
+					.calcH());
+		else if (this.getLeftChild() != null && this.getRightChild() == null)
+			this.fb = this.getLeftChild().calcH() - 0;
+		else if (this.getRightChild() != null && this.getLeftChild() == null)
+			this.fb = 0 - this.getRightChild().calcH();
 		return this.fb;
 	}
 
@@ -213,10 +212,10 @@ public class Node {
 		this.h = h;
 	}
 
-	public int getFb(){
+	public int getFb() {
 		return this.fb;
 	}
-	
+
 	public void incrementParentH() {
 		if (this.parent != null) {
 			this.parent.setH(this.parent.getH() + 1);

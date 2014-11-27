@@ -20,11 +20,11 @@ public class Main {
 		tree.insert(n2);
 		tree.insert(n3);
 		tree.insert(n4);
-		tree.insert(n5);
+		/*tree.insert(n5);
 		tree.insert(n6);
 		tree.insert(n7);
-		tree.insert(n8);
-		tree.print();
+		tree.insert(n8);*/
+		tree.print(); 
 		
 		
 		/*Tree tree = new Tree();
@@ -34,14 +34,11 @@ public class Main {
 		Node n = new Node(3);
 		tree.insert(n);
 		tree.insert(new Node(4));
-		tree.insert(new Node(5));
-		System.out.println(n.getH());
-		System.out.println(root.getH());
-		*/
-		/*tree.deckSearch();
-		tree.leftRotation(n);
-		tree.deckSearch();*/
-		tree.print();
+		tree.insert(new Node(5));				
+		tree.deckSearch();
+		tree.rightRotation(n);
+		tree.deckSearch();
+		tree.print();*/
 
 	}
 

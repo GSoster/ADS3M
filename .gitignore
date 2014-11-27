@@ -28,3 +28,5 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+/FacadeDesignPattern/nbproject/private/
+/FacadeDesignPattern/build/

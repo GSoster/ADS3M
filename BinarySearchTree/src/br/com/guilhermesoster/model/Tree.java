@@ -28,54 +28,58 @@ public class Tree {
 	public void insert(Node newNode) {
 		if (this.root == null)
 			this.root = newNode;
-		else
+		else {
 			this.root.insert(newNode);
 			newNode.calcH();
-			newNode.calcFb();	
-			this.balancear(newNode);
-			while(newNode.getParent()!=null){
+			newNode.calcFb();
+			 this.balancear(newNode);
+			while (newNode.getParent() != null) {
+				System.out.println(newNode.getValue());
 				balancear(newNode.getParent());
-				newNode = newNode.getParent();
+				newNode = newNode.getParent();		
 			}
-	}
-	
-	public void balancear(Node node){
-		node.calcH();
-		node.calcFb();
-		if(node.getFb() == -2 || node.getFb() < -2)
-			if(node.getRightChild()!=null)
-				if(node.getRightChild().calcFb() == 1)
-					node.setRightChild(this.rightRotation(node.getRightChild()));
-				
-		if(node.getFb() == 2 || node.getFb() > 2)
-			if(node.getLeftChild()!=null)
-				if(node.getLeftChild().calcFb() == 1)
-					node.setLeftChild(this.leftRotation(node.getLeftChild()));
+			balancear(root);
+			
+		}
 	}
 
-	
+	public void balancear(Node node) {	
+		int fbN = node.calcFb();
+		if (fbN == -2){
+			if (node.getRightChild().calcFb() == -1)
+				node.setRightChild(this.rightRotation(node.getRightChild()));
+		}
+		if (fbN == 2){					
+				if (node.getLeftChild().calcFb() == 1)
+				node.setLeftChild(this.leftRotation(node.getLeftChild()));			
+		}
+				
+	}
+
 	/**
 	 * busca a altura de um nodo especifico
+	 * 
 	 * @param node
 	 * @return
 	 */
-	public int getH(Node node){
-		if(node == null)
+	public int getH(Node node) {
+		if (node == null)
 			return -1;
 		return node.calcH();
 	}
-	
+
 	/**
 	 * Retorna o fator de balanceamento
+	 * 
 	 * @param node
 	 * @return
 	 */
-	public int getFb(Node node){
-		//return (this.getH(node.getLeftChild()) -this.getH(node.getRightChild()));
+	public int getFb(Node node) {
+		// return (this.getH(node.getLeftChild())
+		// -this.getH(node.getRightChild()));
 		return node.calcFb();
 	}
-	
-	
+
 	/**
 	 * realiza a busca em toda a arvore
 	 */
@@ -177,9 +181,10 @@ public class Tree {
 		Tree backUp = new Tree(n.getRightChild().getLeftChild());// B = GS
 		Node newLeftGrandSon = n;
 		Node fd = n.getRightChild();
-		//Adicionando a parte de pais p/poder utilizar o metodo no meio de arvores
+		// Adicionando a parte de pais p/poder utilizar o metodo no meio de
+		// arvores
 		fd.setParent(n.getParent());
-		n.setParent(fd);		
+		n.setParent(fd);
 		n.getRightChild().setLeftChild(newLeftGrandSon);// FD.esq = n
 		newLeftGrandSon.setRightChild(backUp.getRoot());// n.dir = b
 		if (n.equals(this.root))
@@ -187,13 +192,32 @@ public class Tree {
 		return fd;
 	}
 
+	
+	public Node rightRotation(Node n) {
+		if(n.getLeftChild() == null && n.getRightChild().getLeftChild() == null){
+			n.getRightChild().setLeftChild(n);
+			n.getRightChild().setParent(n.getParent());
+			return n.getParent();
+		}
+			
+		Tree backUp = new Tree(n.getLeftChild().getRightChild());// B = GS
+		Node newLeftGrandSon = n;
+		Node fe = n.getLeftChild();
+		n.getLeftChild().setRightChild(newLeftGrandSon);// FE.dir = n
+		newLeftGrandSon.setLeftChild(backUp.getRoot());// n.esq = b
+		if (n.equals(this.root))
+			this.root = fe;
+		return fe;
+	}
+	
+	
 	/**
 	 * Metodo responsavel por fazer a rotacao p/direita a partir de um nodo n
 	 * 
 	 * @param n
 	 * @return nodo que substituiu o n
 	 */
-	public Node rightRotation(Node n) {
+	public Node BACKUPrightRotation(Node n) {
 		Tree backUp = new Tree(n.getLeftChild().getRightChild());// B = GS
 		Node newLeftGrandSon = n;
 		Node fe = n.getLeftChild();
