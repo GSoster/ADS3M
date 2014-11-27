@@ -5,19 +5,22 @@ public class Node {
 	private int value;
 	private Node[] children;
 	private Node parent;
-	private int h;//altura
-	private int fb;//fator de balanceamento
+	private int h;// altura
+	private int fb;// fator de balanceamento
 
 	public Node(int value) {
 		this.value = value;
 		children = new Node[2];
+		this.h = 1;
+		this.fb = 0;
 	}
 
 	public Node(int value, Node parent) {
 		this.value = value;
 		children = new Node[2];
 		this.parent = parent;
-		this.h = 0;
+		this.h = 1;
+		this.fb = 0;
 	}
 
 	/**
@@ -33,12 +36,14 @@ public class Node {
 				if (this.getLeftChild() == null) {
 					this.setLeftChild(newChildren);
 					this.getLeftChild().setParent(this);
+					this.getLeftChild().incrementParentH();
 				} else
 					this.getLeftChild().insert(newChildren);
 			} else {// inserção na direita
 				if (this.getRightChild() == null) {
 					this.setRightChild(newChildren);
 					this.getRightChild().setParent(this);
+					this.getRightChild().incrementParentH();
 				} else
 					this.getRightChild().insert(newChildren);
 			}
@@ -157,31 +162,66 @@ public class Node {
 	public Node getParent() {
 		return this.parent;
 	}
-	
+
 	/**
 	 * Calcula a altura (h).
+	 * 
 	 * @return
 	 */
-	public int calcH(){
-		this.h = 1 + (Math.max(this.getLeftChild().calcH(), this.getRightChild().calcH()));
+	public int calcH() {
+
+		if (this.getLeftChild() == null && this.getRightChild() == null)
+			return this.getH();
+		else if (this.getLeftChild() == null)
+			this.h = 1 + (this.getRightChild().calcH());
+		else if (this.getRightChild() == null)
+			this.h = 1 + (this.getLeftChild().calcH());
+		else
+			this.h = 1 + (Math.max(this.getLeftChild().calcH(), this
+					.getRightChild().calcH()));
+		
+		//System.out.println("NODO: "+this.getValue()+"H: "+this.h);
 		return this.h;
 	}
-	
+
 	/**
 	 * retorna a altura da arvore
+	 * 
 	 * @return
 	 */
-	public int getH(){
+	public int getH() {
 		return this.h;
 	}
-	
+
 	/**
 	 * deprecated hehe
+	 * 
 	 * @return
 	 */
-	public int calcFb(){
-		this.fb = (this.getLeftChild().calcH() - this.getRightChild().calcH());
+	public int calcFb() {
+		if(this.getLeftChild() != null && this.getRightChild() != null)
+			this.fb = (this.getLeftChild().calcH() - this.getRightChild().calcH());
+		else if(this.getLeftChild() !=null && this.getRightChild() == null)
+			this.fb = this.getLeftChild().calcH();
+		else if(this.getRightChild() != null && this.getLeftChild() == null)
+			this.fb = this.getRightChild().calcH();
+		//System.out.println("NODO: "+this.getValue()+"FB: "+this.fb);
 		return this.fb;
+	}
+
+	public void setH(int h) {
+		this.h = h;
+	}
+
+	public int getFb(){
+		return this.fb;
+	}
+	
+	public void incrementParentH() {
+		if (this.parent != null) {
+			this.parent.setH(this.parent.getH() + 1);
+			this.parent.incrementParentH();
+		}
 	}
 
 }

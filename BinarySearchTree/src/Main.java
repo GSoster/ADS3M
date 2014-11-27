@@ -8,6 +8,26 @@ public class Main {
 		// testeRotacaoEsquerdaEDireita();
 
 		Tree tree = new Tree();
+		Node n1 = new Node(1);
+		Node n2 = new Node(2);
+		Node n3 = new Node(3);
+		Node n4 = new Node(4);
+		Node n5 = new Node(5);
+		Node n6 = new Node(6);
+		Node n7 = new Node(7);
+		Node n8 = new Node(8);
+		tree.insert(n1);
+		tree.insert(n2);
+		tree.insert(n3);
+		tree.insert(n4);
+		tree.insert(n5);
+		tree.insert(n6);
+		tree.insert(n7);
+		tree.insert(n8);
+		tree.print();
+		
+		
+		/*Tree tree = new Tree();
 		Node root = new Node(1);
 		tree.insert(root);
 		tree.insert(new Node(2));
@@ -15,9 +35,13 @@ public class Main {
 		tree.insert(n);
 		tree.insert(new Node(4));
 		tree.insert(new Node(5));
-		tree.deckSearch();
+		System.out.println(n.getH());
+		System.out.println(root.getH());
+		*/
+		/*tree.deckSearch();
 		tree.leftRotation(n);
-		tree.deckSearch();
+		tree.deckSearch();*/
+		tree.print();
 
 	}
 

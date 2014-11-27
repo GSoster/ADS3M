@@ -30,6 +30,27 @@ public class Tree {
 			this.root = newNode;
 		else
 			this.root.insert(newNode);
+			newNode.calcH();
+			newNode.calcFb();	
+			this.balancear(newNode);
+			while(newNode.getParent()!=null){
+				balancear(newNode.getParent());
+				newNode = newNode.getParent();
+			}
+	}
+	
+	public void balancear(Node node){
+		node.calcH();
+		node.calcFb();
+		if(node.getFb() == -2 || node.getFb() < -2)
+			if(node.getRightChild()!=null)
+				if(node.getRightChild().calcFb() == 1)
+					node.setRightChild(this.rightRotation(node.getRightChild()));
+				
+		if(node.getFb() == 2 || node.getFb() > 2)
+			if(node.getLeftChild()!=null)
+				if(node.getLeftChild().calcFb() == 1)
+					node.setLeftChild(this.leftRotation(node.getLeftChild()));
 	}
 
 	
@@ -52,11 +73,6 @@ public class Tree {
 	public int getFb(Node node){
 		//return (this.getH(node.getLeftChild()) -this.getH(node.getRightChild()));
 		return node.calcFb();
-	}
-	
-	public void balancear(Node node){
-		if(getFb(node) == 2);
-			
 	}
 	
 	
