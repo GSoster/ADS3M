@@ -216,7 +216,18 @@ public class Node {
 			r = rightRotation();
 		}
 		// r.posOrdem({calculateH(), calculateFb()});
+		r.posOrderAdjustment();
 		return r;
+	}
+
+	public void posOrderAdjustment() {
+		if (this.getLeftChild() != null)
+			this.getLeftChild().posOrderAdjustment();
+		if (this.getRightChild() != null)
+			this.getRightChild().posOrderAdjustment();
+		calculateH();
+		calculateFb();
+
 	}
 
 	/**

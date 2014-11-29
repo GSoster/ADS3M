@@ -29,12 +29,11 @@ public class Tree {
 		if (this.root == null)
 			this.root = newNode;
 		else
-			this.root = this.root.insert(newNode);
+			this.root = this.root.insert(newNode);				
 	}
 
-
 	public void print() {
-		if(root != null)
+		if (root != null)
 			this.root.print();
 		else
 			System.out.println("arvore vazia");
@@ -48,10 +47,5 @@ public class Tree {
 	public Node getRoot() {
 		return this.root;
 	}
-
-	
-	
-	
-		
 
 }
