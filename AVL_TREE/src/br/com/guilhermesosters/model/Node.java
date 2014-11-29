@@ -29,6 +29,7 @@ public class Node {
 			if (this.getLeftChild() == null) {
 				this.setLeftChild(n);
 				n.setParent(this);
+				n.incrementParentH();
 			} else {
 				this.getLeftChild().insert(n);
 			}
@@ -36,12 +37,17 @@ public class Node {
 		if (n.getValue() > this.value) {
 			if (this.getRightChild() == null) {
 				this.setRightChild(n);
-				n.setParent(this);				
+				n.setParent(this);
+				n.incrementParentH();
 			} else {
 				this.getRightChild().insert(n);
 			}
 		}
 		return this.correct();
+	}
+
+	public void incrementParentH() {
+		this.parent.setH(parent.getH() + 1);
 	}
 
 	/**
@@ -117,7 +123,8 @@ public class Node {
 	 * (root(child(child)(child))(child(child)(child)))
 	 */
 	public void print() {
-		System.out.print("(" + this.getValue());// se imprime
+		System.out.print("(" + this.getValue() + " H->" + this.h + " FB->"
+				+ this.fb);// se imprime
 		if (this.getLeftChild() != null)
 			this.getLeftChild().print();
 		if (this.getRightChild() != null)
@@ -126,62 +133,89 @@ public class Node {
 	}
 
 	public Node leftRotation() {
-		Node fd = getRightChild();
-		Node b = getRightChild().getLeftChild();
-		fd.setLeftChild(this);
-		setParent(fd);
-		fd.setParent(this.getParent());
-		setLeftChild(b);
-		return fd;
+		/*
+		 * b becomes the new root. a takes ownership of b's left child as its
+		 * right child, or in this case, null. b takes ownership of a as its
+		 * left child
+		 */
+		Node newRoot = this.getRightChild();
+		Node newLeftChild = this;
+		newLeftChild.setRightChild(newRoot.getLeftChild());
+		newRoot.setLeftChild(newLeftChild);
+		// ajustando parentesco
+		newRoot.setParent(newLeftChild.getParent());
+		newLeftChild.setParent(newRoot);
+		return newRoot;
 	}
 
+	/*
+	 * public Node leftRotation() { Node fd = getRightChild(); Node b =
+	 * getRightChild().getLeftChild(); fd.setLeftChild(this); setParent(fd);
+	 * fd.setParent(this.getParent()); setLeftChild(b); return fd; }
+	 */
+
 	public Node rightRotation() {
-		Node fe = getLeftChild();// filho esquerda
-		Node b = getLeftChild().getRightChild();// neto direita
-		fe.setRightChild(this);
-		setParent(fe);
-		fe.setParent(this.getParent());
-		setRightChild(b);
-		return fe;
+		/*
+		 * b becomes the new root. a takes ownership of b's right child, as its
+		 * left child. In this case, that value is null. b takes ownership of a,
+		 * as it's right child
+		 */
+		Node newRoot = this.getLeftChild();
+		Node newRightChild = this;
+		newRightChild.setLeftChild(newRoot.getRightChild());
+		newRoot.setRightChild(newRightChild);
+		// ajustando parentesco
+		newRoot.setParent(newRightChild.getParent());
+		newRightChild.setParent(newRoot);
+		return newRoot;
 	}
-	
-	public int calculateH(){
+
+	/**
+	 * public Node rightRotation() { Node fe = getLeftChild();// filho esquerda
+	 * Node b = getLeftChild().getRightChild();// neto direita
+	 * fe.setRightChild(this); setParent(fe); fe.setParent(this.getParent());
+	 * setRightChild(b); return fe; }
+	 **/
+
+	public int calculateH() {
 		int hLeftChild = 0;
 		int hRightChild = 0;
-		if(this.getLeftChild() != null)
+		if (this.getLeftChild() != null)
 			hLeftChild = this.getLeftChild().calculateH();
-		if(this.getRightChild() != null)
+		if (this.getRightChild() != null)
 			hRightChild = this.getRightChild().calculateH();
+		if (this.getLeftChild() == null && this.getRightChild() == null)
+			return this.h;
 		this.h = 1 + Math.max(hLeftChild, hRightChild);
 		return this.h;
 	}
-	
-	public int calculateFb(){
+
+	public int calculateFb() {
 		int hLeftChild = 0;
 		int hRightChild = 0;
-		if(this.getLeftChild() != null)
+		if (this.getLeftChild() != null)
 			hLeftChild = this.getLeftChild().calculateH();
-		if(this.getRightChild() != null)
+		if (this.getRightChild() != null)
 			hRightChild = this.getRightChild().calculateH();
 		this.fb = hLeftChild - hRightChild;
 		return this.fb;
 	}
-	
-	public Node correct(){
+
+	public Node correct() {
 		Node r = this;
-		if(calculateFb() == -2){
-			if(getRightChild().calculateFb() == +1){
+		if (calculateFb() == -2) {
+			if (getRightChild().calculateFb() == +1) {
 				setRightChild(getRightChild().rightRotation());
 			}
 			r = leftRotation();
 		}
-		if(calculateFb() == +2){
-			if(getLeftChild().calculateFb() == -1){
+		if (calculateFb() == +2) {
+			if (getLeftChild().calculateFb() == -1) {
 				setLeftChild(getLeftChild().leftRotation());
 			}
 			r = rightRotation();
 		}
-		//r.posOrdem({calculateH(), calculateFb()});
+		// r.posOrdem({calculateH(), calculateFb()});
 		return r;
 	}
 
@@ -197,5 +231,5 @@ public class Node {
 		this.calculateH();
 		this.calculateFb();
 	}
-	
+
 }
