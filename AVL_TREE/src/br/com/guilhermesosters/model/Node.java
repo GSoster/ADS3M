@@ -185,7 +185,7 @@ public class Node {
 		if (this.getRightChild() != null)
 			hRightChild = this.getRightChild().calculateH();
 		if (this.getLeftChild() == null && this.getRightChild() == null)
-			return this.h;
+			this.h = 1;
 		this.h = 1 + Math.max(hLeftChild, hRightChild);
 		return this.h;
 	}

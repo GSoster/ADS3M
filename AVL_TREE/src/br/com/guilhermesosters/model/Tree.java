@@ -47,5 +47,9 @@ public class Tree {
 	public Node getRoot() {
 		return this.root;
 	}
+	
+	public void posOrderAdjustment(){
+		this.root.posOrderAdjustment();
+	}
 
 }

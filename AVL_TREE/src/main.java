@@ -21,7 +21,8 @@ public class main {
 		System.out.println();
 		t.print();
 		System.out.println();
-		System.out.println(t.getRoot().getLeftChild().getValue());
+		t.posOrderAdjustment();
+		t.print();
 		//System.out.println(t.getRoot().getValue());
 	}
 	
